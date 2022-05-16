@@ -1,0 +1,101 @@
+; POPI -> PO - Phosphatidylinositol from Mtb CB EDIT
+;
+;       C2 — — — C3   
+;         \  C4  /   
+;          \    /
+;            C1  
+;            |
+;          PO4
+;         /  |
+;      GL2 - GL1
+;      |     |
+;   ChainA  ChainB   
+;
+
+[ moleculetype ]
+; molname      nrexcl
+  TBPI          1
+
+[ atoms ]
+; id 	type 	resnr 	residu 	atom 	cgnr 	charge  mass
+   1 	SP1	  1 	TBPI 	C1  	 1 	0 	
+   2 	SP4	  1 	TBPI 	C2  	 2 	0 	
+   3 	SP4	  1 	TBPI 	C3  	 3 	0 	
+   4 	TC4	  1 	TBPI 	C4  	 4 	0 	 0
+   5 	Q5 	  1 	TBPI 	PO4 	 5 	-1.0 	
+   6 	SN4a  1 	TBPI 	GL1 	 6 	0 	
+   7 	N4a	  1 	TBPI 	GL2 	 7 	0
+   8 	C1 	  1 	TBPI 	C1A 	 8 	0 	
+   9 	C1	  1 	TBPI 	C2A 	 9 	0 	
+  10 	C2 	  1 	TBPI 	C3A 	10 	0 	
+  11 	C1 	  1 	TBPI 	C4A 	11 	0 	
+  12    C1    1     TBPI    C5A     12  0
+  13 	C1 	  1 	TBPI 	C1B 	13 	0 	
+  14 	C1 	  1 	TBPI 	C2B 	14 	0 	
+  15 	C1 	  1 	TBPI 	C3B 	15 	0 	
+  16 	C1 	  1 	TBPI 	C4B 	16 	0 	
+
+[ bonds ]
+;  i  j 	funct 	length 	force.c.
+#ifdef FLEXIBLE
+; Using bonds not constraints
+   1  2 	1 	0.3720 	30000 	
+   1  3 	1 	0.3696	30000 	
+   2  3 	1 	0.4044	30000 	
+#endif
+; Phosphodiester    
+   1  5 	1 	0.330 	5000         ;C1 PO4
+   5  6 	1 	0.368 	2250 	     ;PO4 GL1 
+   5  7    	1   0.518 	 600 	     ;PO4 GL2 
+;lipid tail (Martini v3)	
+   6  7 	1 	0.312	2500 	
+   6  8 	1 	0.47 	5000 
+   8  9 	1 	0.42  	2500 	
+   9 10 	1 	0.38  	5000 	
+  10 11 	1 	0.44 	2500 
+  11 12     1   0.42    2500
+   7 13 	1 	0.47 	3600 	
+  13 14 	1 	0.47 	3800 	
+  14 15 	1 	0.47 	3800 	
+  15 16 	1 	0.47 	3800 	
+
+
+[ angles ]
+;  i  j  k 	funct 	angle 	force.c.
+;Orient the headgroup
+   2  1  5  	10	   100.0 	15.0    ;  C2  C1 PO4   
+   1  5  6      10     100.0     4.0    ;  C1 PO4 GL1
+; Tail part (Martini v3)
+   5  6  8 	2 	139.1   31.2 	
+   6  8  9 	2 	180.0 	35.0 
+   8  9 10 	2 	150.0 	25.0 	
+   9 10 11 	2 	130.0 	25.0 
+  10 11 12  2   145.0   25.0
+   7 13 14 	2 	180.0 	35.0 	
+  13 14 15 	2 	180.0 	35.0 	
+  14 15 16 	2 	180.0 	35.0 	
+
+
+[ dihedrals ]
+;  i  j  k  l 	funct 	angle 	force.c.
+ 3  2  1  5       2      -148.0   95.0       ;C3 C2 C1 PO4
+ 2  1  5  6       1       180.0    2.0   2   ;C2 C1 PO4 GL1
+ 
+#ifndef FLEXIBLE
+[ constraints ]
+;  i  j  k 	funct 	length
+; Using constraints not bonds
+   1  2 	1 	0.3720         ;C1 C2  expanded by 20% to account for SASA differences
+   1  3 	1 	0.3696     	   ;C1 C3  
+   2  3 	1 	0.4044     	   ;C2 C3  
+#endif
+
+[ virtual_sitesn ]
+; site funct  constructing atom indices
+   4     2     1 2 3
+
+[ exclusions ]
+;  i  j
+4 3 2 1 5
+3 2 1
+2 1
