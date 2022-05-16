@@ -1,0 +1,80 @@
+; 
+; Topology prepared automatically using PyCGTOOL 
+; James Graham <J.A.Graham@soton.ac.uk> 2016 
+; University of Southampton 
+; https://github.com/jag1g13/pycgtool 
+;
+
+[ moleculetype ]
+BDQ     1
+
+[ atoms ]
+   1 SX2     1 BDQ  B1      1    0.000   98
+   2 TC5     1 BDQ  B2      2    0.000   32
+   3 TC5e    1 BDQ  B3      3    0.000   0
+   4 TN6a    1 BDQ  B4      4    0.000   32
+   5 TN2a    1 BDQ  B5      5    0.000
+   6 TC5     1 BDQ  B6      6    0.000   32
+   7 P1      1 BDQ  B7      7    0.000
+   8 TC5     1 BDQ  B8      8    0.000
+   9 TC5     1 BDQ  B9      9    0.000
+  10 TC5     1 BDQ  B10    10    0.000
+  11 Q1      1 BDQ  B11    11    1.000
+  12 TC5     1 BDQ  B12    12    0.000   32
+  13 TC5     1 BDQ  B13    13    0.000   32
+  14 TC5e    1 BDQ  B14    14    0.000   0
+  15 TC5     1 BDQ  B15    15    0.000   32
+  16 TC5     1 BDQ  B16    16    0.000   32
+
+[ bonds ]
+   1    6    1      0.38570  84960.47425
+   2    4    1      0.38043  77830.34887
+   4    5    1      0.24536  60894.34575
+   6    7    1      0.25703  13714.05350
+   7    8    1      0.31800   1050.40909
+   7   11    1      0.31304   1649.33049
+   7   12    1      0.27499  47499.24494
+  13   15    1      0.40775  99613.20807
+
+[ angles ]
+   6    4    5    2    137.85060    539.37192
+   6    7    8    2     67.13657    129.92088
+   6    7   11    2    119.93338    106.96829
+   6    7   12    2    125.25309    778.12256
+   7    8    9    2    143.35787     66.03292
+   8    7   11    2    154.66861    422.52156
+  11    7   12    2     86.86273     80.76641
+   7   12   13    2    144.44697   2655.68935
+
+[ constraints ]
+   1    2    1      0.30131
+   2    6    1      0.47065
+   4    6    1      0.25826
+   8    9    1      0.25870
+   8   10    1      0.30128
+   9   10    1      0.29027
+  12   13    1      0.25694
+  12   15    1      0.50911
+  12   16    1      0.44882
+  15   16    1      0.28956
+  
+[ dihedrals ]
+; improper
+; i   j  k   l     funct  ref.angle  force_k
+  1   2  6  5   2       180      200    ;defualt for fused bicylcic rings
+  12 13 16 15   2       180      200    ;defualt for fused bicylcic rings
+
+[ virtual_sitesn ]
+; site funct   constructing atom indices
+   3      1       1 2 4 6
+   14     1       12 13 15 16
+
+[ exclusions ]
+ 1 2 3 4 6
+ 2 3 4 6
+ 3 4 6
+ 4 6
+ 12 13 14 15 16
+ 13 14 15 16
+ 14 15 16
+ 15 16
